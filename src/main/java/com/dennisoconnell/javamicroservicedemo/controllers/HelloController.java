@@ -4,6 +4,7 @@ import com.dennisoconnell.javamicroservicedemo.models.GratitudeDto;
 import com.dennisoconnell.javamicroservicedemo.models.Hello;
 import com.dennisoconnell.javamicroservicedemo.models.HelloDto;
 import com.dennisoconnell.javamicroservicedemo.repository.HelloRepository;
+import com.dennisoconnell.javamicroservicedemo.services.HelloService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,6 +31,9 @@ public class HelloController {
     @Autowired
     private HelloRepository helloRepository;
 
+    @Autowired
+    private HelloService helloService;
+
     @GetMapping(value = "hello/check")
     public ResponseEntity<HelloDto> checkLogicHello() {
         Hello hello = new Hello("dennis");
@@ -52,18 +56,15 @@ public class HelloController {
         return new ResponseEntity<>(helloRepository.findById(id).get().toDto(), HttpStatus.OK);
     }
 
-    @PostMapping(value = "hello")
-    public  ResponseEntity<HelloDto> postHello(@Valid @RequestBody HelloDto helloDto){
-        if(helloDto.helloId == 0){
+    @GetMapping(value = "hello/write/{id}")
+    public  ResponseEntity getWriteToFileById(@PathVariable Integer id) throws Exception{
+        helloService.WriteHelloToFile(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
-            Hello hello = new Hello(helloDto.name);
-            for(GratitudeDto gratitudeDto : helloDto.gratitudes){
-                if(gratitudeDto.gratitudeId == 0){
-                    hello.GratitudeList.add(new Gratitude(gratitudeDto.category, gratitudeDto.title, gratitudeDto.reason, hello));
-                }
-            }
-            return new ResponseEntity<>(helloRepository.save(hello).toDto(), HttpStatus.OK);
-        } else throw new ValidationException("Hello can not be patched");
+    @PostMapping(value = "hello")
+    public  ResponseEntity<HelloDto> postHello(@Valid @RequestBody HelloDto helloDto) throws Exception{
+        return new ResponseEntity<>(helloService.CreateHello(helloDto).toDto(), HttpStatus.OK);
     }
 
     @GetMapping(value ="hello/search")

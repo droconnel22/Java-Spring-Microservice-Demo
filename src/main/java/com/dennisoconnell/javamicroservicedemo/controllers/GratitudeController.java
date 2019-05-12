@@ -3,8 +3,6 @@ package com.dennisoconnell.javamicroservicedemo.controllers;
 
 import com.dennisoconnell.javamicroservicedemo.models.Gratitude;
 import com.dennisoconnell.javamicroservicedemo.models.GratitudeDto;
-import com.dennisoconnell.javamicroservicedemo.models.Hello;
-import com.dennisoconnell.javamicroservicedemo.models.HelloDto;
 import com.dennisoconnell.javamicroservicedemo.repository.GratitudeRepository;
 
 import org.slf4j.Logger;
