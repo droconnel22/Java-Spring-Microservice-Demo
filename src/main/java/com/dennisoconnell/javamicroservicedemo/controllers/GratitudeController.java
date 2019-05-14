@@ -10,12 +10,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.ValidationException;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 
 @RestController
@@ -36,11 +38,11 @@ public class GratitudeController {
         return new ResponseEntity<>(gratitudeRepository.findById(id).get().toDto(), HttpStatus.OK);
     }
 
-
     @GetMapping(value ="gratitude/search")
-    public ResponseEntity<List<GratitudeDto>> getByParams(@Valid @RequestParam(value="category", required = true) String category){
+    public ResponseEntity<List<GratitudeDto>> getByParams(@Valid @RequestParam(value="category", required = true) String category) throws Exception{
         if(!category.isEmpty()) {
-            return new ResponseEntity<>(gratitudeRepository.findByCategory(category).stream().map(g -> g.toDto()).collect(Collectors.toList()), HttpStatus.OK);
+            Future<List<Gratitude>> gratitudeList = gratitudeRepository.findByCategoryAsync(category);
+            return new ResponseEntity<>(gratitudeList.get().stream().map(g -> g.toDto()).collect(Collectors.toList()), HttpStatus.OK);
         } else throw  new ValidationException("Client not specified.");
     }
 

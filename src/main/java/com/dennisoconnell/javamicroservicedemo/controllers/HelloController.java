@@ -5,6 +5,9 @@ import com.dennisoconnell.javamicroservicedemo.models.Hello;
 import com.dennisoconnell.javamicroservicedemo.models.HelloDto;
 import com.dennisoconnell.javamicroservicedemo.repository.HelloRepository;
 import com.dennisoconnell.javamicroservicedemo.services.HelloService;
+import com.dennisoconnell.javamicroservicedemo.services.WriteToFile;
+
+import com.dennisoconnell.javamicroservicedemo.services.WriteToFileService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,16 +15,18 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.ValidationException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.Callable;
+
 import java.util.stream.Collectors;
 
+// Spring Controller REST methods are by default Asynchronized.
 @RestController
 @RequestMapping(value = "/api/v1/")
 public class HelloController {
@@ -32,8 +37,12 @@ public class HelloController {
     private HelloRepository helloRepository;
 
     @Autowired
+    private WriteToFile writeToFileService;
+
+    @Autowired
     private HelloService helloService;
 
+    @Async
     @GetMapping(value = "hello/check")
     public ResponseEntity<HelloDto> checkLogicHello() {
         Hello hello = new Hello("dennis");
@@ -56,10 +65,16 @@ public class HelloController {
         return new ResponseEntity<>(helloRepository.findById(id).get().toDto(), HttpStatus.OK);
     }
 
+    @Async
     @GetMapping(value = "hello/write/{id}")
-    public  ResponseEntity getWriteToFileById(@PathVariable Integer id) throws Exception{
-        helloService.WriteHelloToFile(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public Callable<ResponseEntity> getWriteToFileById(@PathVariable Integer id) throws Exception{
+        writeToFileService.WriteHelloToFile(id);
+        return new Callable<ResponseEntity>() {
+            @Override
+            public ResponseEntity call() throws Exception {
+                return new ResponseEntity(HttpStatus.OK);
+            }
+        };
     }
 
     @PostMapping(value = "hello")

@@ -23,7 +23,7 @@ public class Gratitude {
     public String Reason;
     public Date CreatedOn;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn
 
     public Hello Hello;

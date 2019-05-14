@@ -11,13 +11,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.FileWriter;
 
 @Service
-public class HelloService implements IWriteToFile {
+public class HelloService {
 
     private static final Logger log = LoggerFactory.getLogger(HelloService.class);
 
@@ -28,7 +29,7 @@ public class HelloService implements IWriteToFile {
     private GratitudeRepository gratitudeRepository;
 
     public Hello CreateHello(HelloDto helloDto) throws Exception{
-        if(helloDto.helloId == 0){
+        if(helloDto.helloId == 0) {
 
             Hello hello = new Hello(helloDto.name);
             for(GratitudeDto gratitudeDto : helloDto.gratitudes) {
@@ -38,26 +39,5 @@ public class HelloService implements IWriteToFile {
             }
             return helloRepository.save(hello);
         } else throw  new Exception("Can not create an already existing entity");
-    }
-
-    @Override
-    public void WriteHelloToFile(Integer id) throws  Exception {
-        FileWriter fileWriter = null;
-        try {
-            if(helloRepository.findById(id).isPresent()){
-                Hello hello = helloRepository.findById(id).get();
-                // attach a file to FileWriter
-                fileWriter =new FileWriter(hello.name+"_.json");
-                ObjectMapper mapper = new ObjectMapper();
-
-                //Object to JSON in file
-                fileWriter.write(mapper.writeValueAsString(hello.toDto()));
-            }
-
-        } catch( Exception ex){
-            throw new Exception("Failed to write History to File");
-        } finally {
-            fileWriter.close();
-        }
     }
 }

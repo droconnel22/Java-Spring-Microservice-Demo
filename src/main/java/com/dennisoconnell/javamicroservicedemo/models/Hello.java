@@ -27,7 +27,7 @@ public class Hello {
     @Column(name = "created_on", nullable = false)
     public Date CreatedOn;
 
-    @OneToMany(mappedBy = "Hello", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "Hello", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     public List<Gratitude> GratitudeList;
 
 

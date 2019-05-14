@@ -1,6 +1,8 @@
 package com.dennisoconnell.javamicroservicedemo.services;
 
 
-public interface IWriteToFile {
+
+public interface WriteToFile {
+
     void WriteHelloToFile(Integer id) throws  Exception;
 }
