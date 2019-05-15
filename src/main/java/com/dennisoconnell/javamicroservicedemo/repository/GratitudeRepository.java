@@ -13,7 +13,6 @@ import java.util.concurrent.Future;
 public interface GratitudeRepository extends JpaRepository<Gratitude,Integer> {
 
 
-    @Async
-    Future<List<Gratitude>> findByCategoryAsync(String Category);
+    List<Gratitude> findByCategory(String Category);
 
 }

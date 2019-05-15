@@ -41,8 +41,8 @@ public class GratitudeController {
     @GetMapping(value ="gratitude/search")
     public ResponseEntity<List<GratitudeDto>> getByParams(@Valid @RequestParam(value="category", required = true) String category) throws Exception{
         if(!category.isEmpty()) {
-            Future<List<Gratitude>> gratitudeList = gratitudeRepository.findByCategoryAsync(category);
-            return new ResponseEntity<>(gratitudeList.get().stream().map(g -> g.toDto()).collect(Collectors.toList()), HttpStatus.OK);
+            List<Gratitude>gratitudeList = gratitudeRepository.findByCategory(category);
+            return new ResponseEntity<>(gratitudeList.stream().map(g -> g.toDto()).collect(Collectors.toList()), HttpStatus.OK);
         } else throw  new ValidationException("Client not specified.");
     }
 

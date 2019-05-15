@@ -11,17 +11,16 @@ import org.springframework.stereotype.Service;
 import java.io.FileWriter;
 
 @Service
-public class WriteToFileService implements WriteToFile {
-
-    private HelloRepository helloRepository;
+public class WriteToFileService {
 
     @Autowired
-    public WriteToFileService(HelloRepository helloRepository) {
-        this.helloRepository = helloRepository;
+    private HelloRepository helloRepository;
+
+
+    public WriteToFileService() {
     }
 
-    @Async
-    @Override
+
     public void WriteHelloToFile(Integer id) throws  Exception {
         FileWriter fileWriter = null;
         try {

@@ -37,7 +37,7 @@ public class HelloController {
     private HelloRepository helloRepository;
 
     @Autowired
-    private WriteToFile writeToFileService;
+    private WriteToFileService writeToFileService;
 
     @Autowired
     private HelloService helloService;
