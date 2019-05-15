@@ -1,21 +1,16 @@
-package com.dennisoconnell.javamicroservicedemo.services;
+package com.dennisoconnell.javamicroservicedemo.hellos.services;
 
 
-import com.dennisoconnell.javamicroservicedemo.models.Gratitude;
-import com.dennisoconnell.javamicroservicedemo.models.GratitudeDto;
-import com.dennisoconnell.javamicroservicedemo.models.Hello;
-import com.dennisoconnell.javamicroservicedemo.models.HelloDto;
-import com.dennisoconnell.javamicroservicedemo.repository.GratitudeRepository;
-import com.dennisoconnell.javamicroservicedemo.repository.HelloRepository;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.dennisoconnell.javamicroservicedemo.hellos.domain.Gratitude;
+import com.dennisoconnell.javamicroservicedemo.hellos.domain.GratitudeDto;
+import com.dennisoconnell.javamicroservicedemo.hellos.domain.Hello;
+import com.dennisoconnell.javamicroservicedemo.hellos.domain.HelloDto;
+import com.dennisoconnell.javamicroservicedemo.hellos.infrastructure.mysql.GratitudeRepository;
+import com.dennisoconnell.javamicroservicedemo.hellos.infrastructure.mysql.HelloRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-
-import java.io.File;
-import java.io.FileWriter;
 
 @Service
 public class HelloService {

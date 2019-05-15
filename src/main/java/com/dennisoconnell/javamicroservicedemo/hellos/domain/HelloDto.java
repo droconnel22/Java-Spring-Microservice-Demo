@@ -1,4 +1,4 @@
-package com.dennisoconnell.javamicroservicedemo.models;
+package com.dennisoconnell.javamicroservicedemo.hellos.domain;
 
 
 import javax.validation.constraints.NotNull;

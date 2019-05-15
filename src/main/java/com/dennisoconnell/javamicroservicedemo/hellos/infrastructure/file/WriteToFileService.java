@@ -1,11 +1,10 @@
-package com.dennisoconnell.javamicroservicedemo.services;
+package com.dennisoconnell.javamicroservicedemo.hellos.infrastructure.file;
 
 
-import com.dennisoconnell.javamicroservicedemo.models.Hello;
-import com.dennisoconnell.javamicroservicedemo.repository.HelloRepository;
+import com.dennisoconnell.javamicroservicedemo.hellos.domain.Hello;
+import com.dennisoconnell.javamicroservicedemo.hellos.infrastructure.mysql.HelloRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.io.FileWriter;

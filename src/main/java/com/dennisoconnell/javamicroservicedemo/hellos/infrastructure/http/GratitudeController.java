@@ -1,23 +1,21 @@
-package com.dennisoconnell.javamicroservicedemo.controllers;
+package com.dennisoconnell.javamicroservicedemo.hellos.infrastructure.http;
 
 
-import com.dennisoconnell.javamicroservicedemo.models.Gratitude;
-import com.dennisoconnell.javamicroservicedemo.models.GratitudeDto;
-import com.dennisoconnell.javamicroservicedemo.repository.GratitudeRepository;
+import com.dennisoconnell.javamicroservicedemo.hellos.domain.Gratitude;
+import com.dennisoconnell.javamicroservicedemo.hellos.domain.GratitudeDto;
+import com.dennisoconnell.javamicroservicedemo.hellos.infrastructure.mysql.GratitudeRepository;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.ValidationException;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 
 @RestController

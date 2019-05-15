@@ -1,13 +1,12 @@
-package com.dennisoconnell.javamicroservicedemo.controllers;
-import com.dennisoconnell.javamicroservicedemo.models.Gratitude;
-import com.dennisoconnell.javamicroservicedemo.models.GratitudeDto;
-import com.dennisoconnell.javamicroservicedemo.models.Hello;
-import com.dennisoconnell.javamicroservicedemo.models.HelloDto;
-import com.dennisoconnell.javamicroservicedemo.repository.HelloRepository;
-import com.dennisoconnell.javamicroservicedemo.services.HelloService;
-import com.dennisoconnell.javamicroservicedemo.services.WriteToFile;
+package com.dennisoconnell.javamicroservicedemo.hellos.infrastructure.http;
+import com.dennisoconnell.javamicroservicedemo.hellos.domain.Gratitude;
+import com.dennisoconnell.javamicroservicedemo.hellos.domain.GratitudeDto;
+import com.dennisoconnell.javamicroservicedemo.hellos.domain.Hello;
+import com.dennisoconnell.javamicroservicedemo.hellos.domain.HelloDto;
+import com.dennisoconnell.javamicroservicedemo.hellos.infrastructure.file.WriteToFileService;
+import com.dennisoconnell.javamicroservicedemo.hellos.infrastructure.mysql.HelloRepository;
+import com.dennisoconnell.javamicroservicedemo.hellos.services.HelloService;
 
-import com.dennisoconnell.javamicroservicedemo.services.WriteToFileService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

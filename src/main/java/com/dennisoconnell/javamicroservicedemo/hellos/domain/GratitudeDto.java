@@ -1,4 +1,4 @@
-package com.dennisoconnell.javamicroservicedemo.models;
+package com.dennisoconnell.javamicroservicedemo.hellos.domain;
 
 import lombok.Getter;
 import lombok.Setter;

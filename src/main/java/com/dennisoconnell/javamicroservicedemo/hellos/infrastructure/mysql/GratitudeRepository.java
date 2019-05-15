@@ -1,13 +1,11 @@
-package com.dennisoconnell.javamicroservicedemo.repository;
+package com.dennisoconnell.javamicroservicedemo.hellos.infrastructure.mysql;
 
-import com.dennisoconnell.javamicroservicedemo.models.Gratitude;
+import com.dennisoconnell.javamicroservicedemo.hellos.domain.Gratitude;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.concurrent.Future;
 
 @Repository
 public interface GratitudeRepository extends JpaRepository<Gratitude,Integer> {

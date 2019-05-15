@@ -1,6 +1,6 @@
-package com.dennisoconnell.javamicroservicedemo.repository;
+package com.dennisoconnell.javamicroservicedemo.hellos.infrastructure.mysql;
 
-import com.dennisoconnell.javamicroservicedemo.models.Hello;
+import com.dennisoconnell.javamicroservicedemo.hellos.domain.Hello;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
